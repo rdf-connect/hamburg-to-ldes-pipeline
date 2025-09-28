@@ -1,0 +1,15 @@
+{
+  "name": "ldes-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@solid/community-server": "^7.1.7",
+    "ldes-solid-server": "^0.2.0"
+  }
+}

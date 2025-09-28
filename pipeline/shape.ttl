@@ -1,0 +1,106 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix stapi: <https://pod.rubendedecker.be/scholar/ontologies/stapi#> .
+@prefix : <https://example.org/ns#> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+
+#################################################################
+# Single NodeShape: Observation
+#################################################################
+:ObservationShape
+    a sh:NodeShape ;
+    sh:targetClass stapi:Observation ;
+
+    sh:property [ sh:path stapi:phenomenonTime ] ;
+    sh:property [ sh:path stapi:result ] ;
+    sh:property [ sh:path stapi:resultTime ] ;
+
+    #################################################################
+    # Feature of Interest
+    #################################################################
+
+    sh:property [
+        sh:path stapi:featureOfInterest ;
+        sh:node [
+            a sh:NodeShape ;
+            sh:property [ sh:path stapi:description ] ;
+            sh:property [ sh:path stapi:encodingType ] ;
+            sh:property [ sh:path stapi:feature ] ;
+            sh:property [ sh:path stapi:name ] ;
+        ] ;
+    ] ;
+
+    #################################################################
+    # Datastream
+    #################################################################
+    sh:property [
+        sh:path stapi:datastream ;
+        sh:node [
+            a sh:NodeShape ;
+            sh:property [ sh:path stapi:description ] ;
+            sh:property [ sh:path stapi:name ] ;
+            sh:property [ sh:path stapi:observationType ] ;
+            sh:property [ sh:path stapi:observedArea ] ;
+            sh:property [ sh:path stapi:phenomenonTime ] ;
+            sh:property [ sh:path stapi:properties ] ;
+            sh:property [ sh:path stapi:resultTime ] ;
+            sh:property [ sh:path stapi:unitOfMeasurement ] ;
+
+            #################################################################
+            # Observed Property
+            #################################################################
+
+            sh:property [
+                sh:path stapi:observedProperty ;
+                sh:node [
+                    a sh:NodeShape ;
+                    sh:property [ sh:path stapi:definition ] ;
+                    sh:property [ sh:path stapi:description ] ;
+                    sh:property [ sh:path stapi:name ] ;
+                ] ;
+            ] ;
+            
+            #################################################################
+            # Sensor
+            #################################################################
+
+            sh:property [
+                sh:path stapi:sensor ;
+                sh:node [
+                    a sh:NodeShape ;
+                    sh:property [ sh:path stapi:description ] ;
+                    sh:property [ sh:path stapi:encodingType ] ;
+                    sh:property [ sh:path stapi:metadata ] ;
+                    sh:property [ sh:path stapi:name ] ;
+                ] ;
+            ] ;
+
+            #################################################################
+            # Thing
+            #################################################################
+
+            sh:property [
+                sh:path stapi:thing ;
+                sh:node [
+                    a sh:NodeShape ;
+                    sh:property [ sh:path stapi:description ] ;
+                    sh:property [ sh:path stapi:name ] ;
+                    sh:property [ sh:path stapi:properties ] ;
+                    sh:property [
+                        sh:path stapi:locations ;
+                        sh:node [
+                            a sh:NodeShape ;
+                            sh:property [
+                                sh:path geo:hasGeometry ;
+                                sh:node [
+                                    a sh:NodeShape ;
+                                ] ;
+                            ] ;
+                            
+                        ] ;
+                    ] ;
+                ] ;
+            ] ;
+        ] ;
+    ] .

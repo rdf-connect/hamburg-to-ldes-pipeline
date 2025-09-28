@@ -1,0 +1,111 @@
+prefixes:
+  stapi: "https://pod.rubendedecker.be/scholar/ontologies/stapi#"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  geo: "http://www.opengis.net/ont/geosparql#"
+  geosf: "http://www.opengis.net/ont/sf#"
+
+mappings:
+  observation:
+    sources:
+      - ['data.json~jsonpath', '$.observation']
+    s: $(['@iot.selfLink'])
+    po:
+      - [a, stapi:Observation]
+      - [stapi:phenomenonTime, $(phenomenonTime), xsd:duration]
+      - [stapi:resultTime, $(resultTime), xsd:dateTime]
+      - [stapi:result, $(result)]
+      - [stapi:datastream, $(datastream)~iri]
+      - [stapi:featureOfInterest, $(featureOfInterest)~iri ]
+
+  datastream:
+    sources:
+      - ['data.json~jsonpath', '$.datastream']
+    s: $(['@iot.selfLink'])
+    po:
+      - [a, stapi:Datastream]
+      - [stapi:name, $(name)]
+      - [stapi:description, $(description)]
+      - [stapi:observationType, $(observationType)~iri]
+      - [stapi:unitOfMeasurement, $(unitOfMeasurement), rdf:JSON]
+      - [stapi:observedArea, $(observedArea), rdf:JSON]
+      - [stapi:phenomenonTime, $(phenomenonTime), xsd:duration]
+      - [stapi:resultTime, $(resultTime), xsd:dateTime]
+      # - [stapi:properties, $(properties), rdf:JSON]
+      # - [stapi:observation, $(observation)~iri ]
+      - [stapi:observedProperty, $(observedProperty)~iri ]
+      - [stapi:sensor, $(sensor)~iri ]
+      - [stapi:thing, $(thing)~iri ]
+
+  thing:
+    sources:
+      - ['data.json~jsonpath', '$.thing']
+    s: $(['@iot.selfLink'])
+    po:
+      - [a, stapi:Thing]
+      - [stapi:name, $(name)]
+      - [stapi:description, $(description)]
+      # - [stapi:properties, $(properties), rdf:JSON]
+      - [stapi:locations, $(locations)~iri]
+
+  observedProperty:
+    sources:
+      - ['data.json~jsonpath', '$.observedProperty']
+    s: $(['@iot.selfLink'])
+    po:
+      - [a, stapi:ObservedProperty]
+      - [stapi:name, $(name)]
+      - [stapi:description, $(description)]
+      - [stapi:definition, $(definition)]
+
+  sensor:
+    sources:
+      - ['data.json~jsonpath', '$.sensor']
+    s: $(['@iot.selfLink'])
+    po:
+      - [a, stapi:Sensor]
+      - [stapi:name, $(name)]
+      - [stapi:description, $(description)]
+      - [stapi:encodingType, $(encodingType)]
+      - [stapi:metadata, $(metadata), rdf:JSON]
+  
+  featureOfInterest:
+    sources:
+      - ['data.json~jsonpath', '$.featureOfInterest']
+    s: $(['@iot.selfLink'])
+    po:
+      - [a, stapi:FeatureOfInterest]
+      - [stapi:name, $(name)]
+      - [stapi:description, $(description)]
+      - [stapi:encodingType, $(encodingType)]
+      - [stapi:feature, $(feature), rdf:JSON]
+      # - [stapi:properties, $(properties), rdf:JSON]
+          
+  location:
+    sources:
+      - ['data.json~jsonpath', '$.locations[*]']
+    s: $(['@iot.selfLink'])
+    po:
+      - [a, stapi:Location]
+      - [stapi:name, $(name)]
+      - [stapi:description, $(description)]
+      - p: geo:hasGeometry
+        o:
+          mapping: geomapping        
+             
+  geomapping:
+    sources:
+      - ['data.json~jsonpath', '$.locations[*]']
+    s: 
+       value: blank-$(['@iot.id'])-geo
+       type: blank
+    po:
+      - [a, geo:Geometry]
+      - [a, geosf:Point]
+      - p: geo:lat
+        o: $(location.geometry.coordinates[1])
+      - p: geo:long
+        o: $(location.geometry.coordinates[0])
+      - p: geo:asWKT
+        o: POINT\($(location.geometry.coordinates[0]) $(location.geometry.coordinates[1])\)
+        datatype: geo:wktLiteral

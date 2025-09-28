@@ -1,0 +1,42 @@
+{
+  "name": "@rdfc/stapi-processor-ts",
+  "version": "0.0.0",
+  "description": "Processor to fetch SensorThings API content.",
+  "type": "module",
+  "main": "lib/index.js",
+  "files": [
+    "lib/**/*",
+    "processor.ttl"
+  ],
+  "scripts": {
+    "build": "tsc && tsc-alias",
+    "test": "vitest run --coverage --coverage.include src",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rdf-connect/stapi-processor-ts"
+  },
+  "author": "Ruben Dedecker",
+  "license": "MIT",
+  "devDependencies": {
+    "@rdfc/js-runner": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.41.0",
+    "@typescript-eslint/parser": "^8.41.0",
+    "@vitest/coverage-v8": "^3.2.4",
+    "dotenv": "^16.6.1",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^10.1.8",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.2",
+    "prettier": "^3.6.2",
+    "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.16",
+    "typescript": "^5.9.2",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.2.4"
+  },
+  "dependencies": {
+    "winston": "^3.17.0"
+  }
+}

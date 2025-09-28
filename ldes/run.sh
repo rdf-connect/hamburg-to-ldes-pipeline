@@ -1,0 +1,1 @@
+npx @solid/community-server -c config.json -f ./data

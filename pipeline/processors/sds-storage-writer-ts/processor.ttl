@@ -1,0 +1,69 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix rdfc: <https://w3id.org/conn/js#>.
+@prefix fno: <https://w3id.org/function/ontology#>.
+@prefix fnom: <https://w3id.org/function/vocabulary/mapping#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix : <https://w3id.org/conn#>.
+@prefix sh: <http://www.w3.org/ns/shacl#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix dc: <http://purl.org/dc/terms/>.
+@prefix rdfc: <https://w3id.org/rdf-connect#>.
+
+rdfc:Ingest a owl:Class, rdfs:class;
+    rdfc:jsImplementationOf rdfc:Processor;
+    rdfs:label "LDES-server ingestor (mongoDB)";
+    rdfs:description "Processor that can ingest a SDS stream to generate a Linked Data Event Stream. Uses sds:Bucket to describe the used fragmentation (see js:Bucketize). If ldes:timestampPath is declared it will automatically create a time-based fragmentation.";
+    rdfc:file <./lib/index.js>;
+    rdfc:class "Ingest";
+    rdfc:entrypoint <../>.
+
+[ ] a sh:NodeShape;
+  sh:targetClass rdfc:Ingest;
+  sh:property [
+    sh:class rdfc:Reader;
+    sh:path rdfc:dataInput;
+    sh:name "dataInput";
+    sh:maxCount 1;
+    sh:minCount 1;
+  ], [
+    sh:class rdfc:Reader;
+    sh:path rdfc:metadataInput;
+    sh:name "metadataInput";
+    sh:maxCount 1;
+    sh:minCount 1;
+  ], [
+    sh:class rdfc:Database;
+    sh:path rdfc:database;
+    sh:name "database";
+    sh:maxCount 1;
+    sh:minCount 1;
+  ].
+
+
+[ ] a sh:NodeShape;
+  sh:targetClass rdfc:Database;
+  sh:property [
+    sh:name "url";
+    sh:path rdfc:url;
+    sh:datatype xsd:string;
+    sh:maxCount 1;
+    sh:minCount 1;
+  ], [
+    sh:name "data";
+    sh:path rdfc:data;
+    sh:datatype xsd:string;
+    sh:maxCount 1;
+    sh:minCount 1;
+  ], [
+    sh:name "metadata";
+    sh:path rdfc:metadata;
+    sh:datatype xsd:string;
+    sh:maxCount 1;
+    sh:minCount 1;
+  ], [
+    sh:name "index";
+    sh:path rdfc:index;
+    sh:datatype xsd:string;
+    sh:maxCount 1;
+    sh:minCount 1;
+  ].

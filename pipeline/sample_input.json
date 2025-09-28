@@ -1,0 +1,140 @@
+{
+  "observation": {
+    "@iot.selfLink": "https://iot.hamburg.de/v1.1/Observations(1035885905)",
+    "@iot.id": 1035885905,
+    "phenomenonTime": "2025-09-04T22:00:00Z/2025-09-04T22:59:59Z",
+    "resultTime": "2025-09-06T03:42:36.274Z",
+    "result": 24,
+    "Datastream@iot.navigationLink": "https://iot.hamburg.de/v1.1/Observations(1035885905)/Datastream",
+    "FeatureOfInterest@iot.navigationLink": "https://iot.hamburg.de/v1.1/Observations(1035885905)/FeatureOfInterest",
+    "datastream": "https://iot.hamburg.de/v1.1/Datastreams(16453)",
+    "featureOfInterest": "https://iot.hamburg.de/v1.1/FeaturesOfInterest(11205691)"
+  },
+  "featureOfInterest": {
+    "@iot.selfLink": "https://iot.hamburg.de/v1.1/FeaturesOfInterest(11205691)",
+    "@iot.id": 11205691,
+    "name": "FoI for location 26519553",
+    "description": "Generated from location 26519553",
+    "encodingType": "application/vnd.geo+json",
+    "feature": {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.997793,
+          53.544388
+        ]
+      }
+    },
+    "Observations@iot.navigationLink": "https://iot.hamburg.de/v1.1/FeaturesOfInterest(11205691)/Observations"
+  },
+  "datastream": {
+    "@iot.selfLink": "https://iot.hamburg.de/v1.1/Datastreams(16453)",
+    "@iot.id": 16453,
+    "name": "Kfz-Aufkommen an Verkehrszählstelle 0408922 im 1-Stunde-Intervall",
+    "description": "Die Anzahl der von der Infrarotkamera erfassten Kfz wird für ein 1-Stunde-Intervall aufsummiert.",
+    "observationType": "http://defs.opengis.net/elda-common/ogc-def/resource?uri=http://www.opengis.net/def/ogc-om/OM_CountObservation",
+    "unitOfMeasurement": {
+      "name": "Anzahl",
+      "symbol": null,
+      "definition": null
+    },
+    "observedArea": {
+      "type": "Point",
+      "coordinates": [
+        9.997793,
+        53.544388
+      ]
+    },
+    "phenomenonTime": "2025-07-21T03:00:00Z/2025-09-09T05:59:59Z",
+    "properties": {
+      "topic": "Verkehr",
+      "metadata": "https://registry.gdi-de.org/id/de.hh/03957ed9-5fc4-48a5-997e-e46c8c207c8f",
+      "layerName": "Anzahl_Kfz_Zaehlstelle_1-Stunde",
+      "ownerData": "Freie und Hansestadt Hamburg",
+      "serviceName": "HH_STA_AutomatisierteVerkehrsmengenerfassung",
+      "resultNature": "processed",
+      "infoLastUpdate": "2023-03-23T13:51:01.047Z",
+      "mediaMonitored": "transport",
+      "statisticalUnit": "count",
+      "aggregateDuration": "PT1H",
+      "aggregateSource.Datastream@iot.id": 16452,
+      "aggregateSource.Datastream@iot.navigationLink": "https://iot.hamburg.de/v1.1/Datastreams(16452)"
+    },
+    "resultTime": "2021-11-19T02:43:28.367Z/2025-09-10T03:40:02.507Z",
+    "ObservedProperty@iot.navigationLink": "https://iot.hamburg.de/v1.1/Datastreams(16453)/ObservedProperty",
+    "Sensor@iot.navigationLink": "https://iot.hamburg.de/v1.1/Datastreams(16453)/Sensor",
+    "Thing@iot.navigationLink": "https://iot.hamburg.de/v1.1/Datastreams(16453)/Thing",
+    "Observations@iot.navigationLink": "https://iot.hamburg.de/v1.1/Datastreams(16453)/Observations",
+    "observation": "https://iot.hamburg.de/v1.1/Observations(1035885905)",
+    "thing": "https://iot.hamburg.de/v1.1/Things(7712)",
+    "observedProperty": "https://iot.hamburg.de/v1.1/ObservedProperties(5654)",
+    "sensor": "https://iot.hamburg.de/v1.1/Sensors(5647)"
+  },
+  "thing": {
+    "@iot.selfLink": "https://iot.hamburg.de/v1.1/Things(7712)",
+    "@iot.id": 7712,
+    "name": "Verkehrszählstelle 0408922",
+    "description": "Verkehrszählstelle zur Zählung der vom Infrarotdetektor erfassten Mobilitätswerkzeuge",
+    "properties": {
+      "assetID": "0408922",
+      "keywords": [
+        "Infrarotkamera",
+        "Verkehrsmenge",
+        "automatisierte Verkehrsmengenerfassung",
+        "Hamburg",
+        "aVME"
+      ],
+      "language": "de",
+      "richtung": "Süd nach Nord",
+      "ownerThing": "Freie und Hansestadt Hamburg",
+      "infoLastUpdate": "2021-11-19T01:33:24.754Z"
+    },
+    "Locations@iot.navigationLink": "https://iot.hamburg.de/v1.1/Things(7712)/Locations",
+    "HistoricalLocations@iot.navigationLink": "https://iot.hamburg.de/v1.1/Things(7712)/HistoricalLocations",
+    "Datastreams@iot.navigationLink": "https://iot.hamburg.de/v1.1/Things(7712)/Datastreams",
+    "locations": [
+      "https://iot.hamburg.de/v1.1/Locations(26519553)"
+    ]
+  },
+  "locations": [
+    {
+      "@iot.selfLink": "https://iot.hamburg.de/v1.1/Locations(26519553)",
+      "@iot.id": 26519553,
+      "name": "Verkehrszählstelle 0408922",
+      "description": "Mittelpunkt des Streckenverlaufes bezüglich Zählstelle 0408 auf dem Richtungsarm Nord von Süd nach Nord",
+      "encodingType": "application/vnd.geo+json",
+      "location": {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            9.997793,
+            53.544388
+          ]
+        }
+      },
+      "HistoricalLocations@iot.navigationLink": "https://iot.hamburg.de/v1.1/Locations(26519553)/HistoricalLocations",
+      "Things@iot.navigationLink": "https://iot.hamburg.de/v1.1/Locations(26519553)/Things"
+    }
+  ],
+  "sensor": {
+    "@iot.selfLink": "https://iot.hamburg.de/v1.1/Sensors(5647)",
+    "@iot.id": 5647,
+    "name": "Infrarotdetektor in TermiCam2",
+    "description": "Infrarotdetektor zur Erfassung von Mobilitätswerkzeugen (u.a. Pkw und Fahrrad)",
+    "encodingType": "application/pdf",
+    "metadata": "https://flir.netx.net/file/asset/17428/original",
+    "Datastreams@iot.navigationLink": "https://iot.hamburg.de/v1.1/Sensors(5647)/Datastreams"
+  },
+  "observedProperty": {
+    "@iot.selfLink": "https://iot.hamburg.de/v1.1/ObservedProperties(5654)",
+    "@iot.id": 5654,
+    "name": "Anzahl Kfz je Zählstelle",
+    "definition": "Anzahl Kfz die von einem Detektionssystem erfasst  und über eine Zählstelle aggregiert wurden ",
+    "description": "Anzahl Kfz, die die Zählstelle passiert haben",
+    "Datastreams@iot.navigationLink": "https://iot.hamburg.de/v1.1/ObservedProperties(5654)/Datastreams"
+  }
+}

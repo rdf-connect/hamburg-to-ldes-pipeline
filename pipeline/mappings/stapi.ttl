@@ -1,0 +1,296 @@
+@base <https://pod.rubendedecker.be/scholar/ontologies/stapi> .
+@prefix : <https://pod.rubendedecker.be/scholar/ontologies/stapi> .
+@prefix stapi: <https://pod.rubendedecker.be/scholar/ontologies/stapi> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix schema: <http://schema.org/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix cc: <http://creativecommons.org/ns#> .      
+@prefix vann: <https://vocab.org/vann/> .          
+
+# Placeholder location
+                                            
+<https://pod.rubendedecker.be/scholar/ontologies/stapi> rdf:type owl:Ontology ;
+                          owl:versionInfo "0.1.0" ;
+                          dct:modified "2025-05-27" ;
+                          dct:description "Ontology for the SensorThings API in RDF."@en ;
+                          dct:title "SensorThings API Vocabulary"@en ;
+                          dct:contributor <https://pod.rubendedecker.be/profile/card#me>;
+                          vann:preferredNamespacePrefix "stapi" ;
+                          vann:preferredNamespaceUri <https://pod.rubendedecker.be/scholar/ontologies/stapi> .
+
+###############
+### Classes ###
+###############
+
+
+stapi:Thing rdf:type owl:Class ;
+    rdfs:label "Thing" ;
+    rdfs:comment "An object of the physical world (physical things) or the information world (virtual things) that is capable of being identified and integrated into communication networks." .
+
+stapi:Location rdf:type owl:Class ;
+    rdfs:label "Location" ;
+    rdfs:comment "A Location entity locates the Thing and is typically a geospatial location. It represents the last known location of the Thing." .
+
+stapi:HistoricalLocation rdf:type owl:Class ;
+    rdfs:label "HistoricalLocation" ;
+    rdfs:comment "A HistoricalLocation entity represents a previous location of a Thing in time." .
+
+stapi:Datastream rdf:type owl:Class ;
+    rdfs:label "Datastream" ;
+    rdfs:comment "A Datastream entity groups a collection of Observations measuring the same phenomenon (ObservedProperty) and produced by the same Sensor. It links a Thing to an ObservedProperty via a Sensor." .
+
+stapi:Sensor rdf:type owl:Class ;
+    rdfs:label "Sensor" ;
+    rdfs:comment "A Sensor entity is an instrument or procedure that observes a property or phenomenon and generates an Observation." .
+
+stapi:ObservedProperty rdf:type owl:Class ;
+    rdfs:label "ObservedProperty" ;
+    rdfs:comment "An ObservedProperty entity specifies the phenomenon that is being observed by the Sensor." .
+
+stapi:Observation rdf:type owl:Class ;
+    rdfs:label "Observation" ;
+    rdfs:comment "An Observation entity links a Datastream to the result of observing a FeatureOfInterest at a specific time." .
+
+stapi:FeatureOfInterest rdf:type owl:Class ;
+    rdfs:label "FeatureOfInterest" ;
+    rdfs:comment "A FeatureOfInterest represents the real-world feature or object whose property is being observed." .
+
+
+##########################
+### Class Associations ###
+########################## 
+
+
+
+# Thing
+stapi:thing rdf:type owl:ObjectProperty ;
+    rdfs:domain rdfs:Resource ;
+    rdfs:range stapi:Thing ;
+    rdfs:label "thing" ;
+    rdfs:comment "Association to Thing (to which a Datastream belongs, or to which a Location or HistoricalLocation is associated)." .
+
+# Locations
+stapi:locations rdf:type owl:ObjectProperty ;
+    rdfs:domain rdfs:Resource ;
+    rdfs:range stapi:Location ;
+    rdfs:label "locations" ;
+    rdfs:comment "Association to one or more Locations." .
+
+# HistoricalLocations
+stapi:historicalLocations rdf:type owl:ObjectProperty ;
+    rdfs:domain rdfs:Resource ;
+    rdfs:range stapi:HistoricalLocation ;
+    rdfs:label "HistoricalLocations" ;
+    rdfs:comment "Association to one or more HistoricalLocation entities." .
+
+# Datastream
+stapi:datastream rdf:type owl:ObjectProperty ;
+    rdfs:domain rdfs:Resource ;
+    rdfs:range stapi:Datastream ;
+    rdfs:label "datastream" ;
+    rdfs:comment "Association to one or more Datastream entities." .
+
+# Sensor
+stapi:sensor rdf:type owl:ObjectProperty ;
+    rdfs:domain rdfs:Resource ;
+    rdfs:range stapi:Sensor ;
+    rdfs:label "sensor" ;
+    rdfs:comment "The Sensor producing the Observations in a Datastream." .
+
+# ObservedProperty
+stapi:observedProperty rdf:type owl:ObjectProperty ;
+    rdfs:domain rdfs:Resource ;
+    rdfs:range stapi:ObservedProperty ;
+    rdfs:label "observedProperty" ;
+    rdfs:comment "The ObservedProperty that is being observed in a Datastream." .
+
+# Observations
+stapi:observations rdf:type owl:ObjectProperty ;
+    rdfs:domain rdfs:Resource ;
+    rdfs:range stapi:Observation ;
+    rdfs:label "observations" ;
+    rdfs:comment "The Observations associated to a Datastream or FeatureOfInterest." .
+
+# FeatureOfInterest
+stapi:featureOfInterest rdf:type owl:ObjectProperty ;
+    rdfs:domain rdfs:Resource ;
+    rdfs:range stapi:FeatureOfInterest ;
+    rdfs:label "featureOfInterest" ;
+    rdfs:comment "The FeatureOfInterest associated with an Observation." .
+
+#########################
+### Common properties ###
+#########################
+
+stapi:name rdf:type owl:DatatypeProperty ;
+    rdfs:domain stapi:Thing ;
+    rdfs:range xsd:string ;
+    rdfs:label "name" ;
+    rdfs:comment "A property providing a label for the Thing entity, commonly a descriptive name." .
+
+stapi:description rdf:type owl:DatatypeProperty ;
+    rdfs:domain stapi:Thing ;
+    rdfs:range xsd:string ;
+    rdfs:label "description" ;
+    rdfs:comment "A short description of the corresponding Thing entity." .
+
+stapi:properties rdf:type owl:DatatypeProperty ;
+    rdfs:domain stapi:Thing ;
+    rdfs:range xsd:string ; # Typically a JSON object represented as a string.
+    rdfs:label "properties" ;
+    rdfs:comment "A JSON Object containing user-annotated properties as key-value pairs." .
+
+
+
+
+#################################
+### Class specific properties ###
+#################################
+
+### Properties of Location
+
+stapi:encodingType rdf:type owl:DatatypeProperty ;
+    rdfs:domain stapi:Location ;
+    rdfs:range xsd:string ;
+    rdfs:label "encodingType" ;
+    rdfs:comment "The encoding type of the location property (e.g., 'application/vnd.geo+json')." .
+
+stapi:location rdf:type owl:DatatypeProperty ; # todo: double check
+    rdfs:domain stapi:Location ;
+    rdfs:range xsd:string ;
+    rdfs:label "location" ;
+    rdfs:comment "The actual location information in the specified encoding type." . #todo: follow up on the location mapping
+
+
+### Properties of HistoricalLocation
+
+stapi:time rdf:type owl:DatatypeProperty ;
+    rdfs:domain stapi:HistoricalLocation ;
+    rdfs:range xsd:dateTime ;
+    rdfs:label "time" ;
+    rdfs:comment "The time instant when the Thing was at this location." .
+
+
+
+### Properties of Datastream
+
+stapi:observationType rdf:type owl:DatatypeProperty ; # todo: follow up this references a URI not a string
+    rdfs:domain stapi:Datastream ;
+    rdfs:range xsd:string ;
+    rdfs:label "observationType" ;
+    rdfs:comment "The type of observation, typically a URI identifying the format." .
+
+stapi:unitOfMeasurement rdf:type owl:DatatypeProperty ;
+    rdfs:domain stapi:Datastream ;
+    rdfs:range xsd:string ;  # Typically a JSON object, so represented as a string: todo: follow up on this and do recursive mapping.
+    rdfs:label "unitOfMeasurement" ;
+    rdfs:comment "Metadata about the unit of measurement (typically a JSON object represented as a string)." .
+
+stapi:phenomenonTimeDuration rdf:type owl:DatatypeProperty ;
+    rdfs:domain stapi:Datastream ;
+    rdfs:range xsd:duration ;  # Typically an ISO 8601 time interval
+    rdfs:label "phenomenonTime" ;
+    rdfs:comment "The time period during which the Observations in this Datastream were made." .
+
+stapi:resultTimeDuration rdf:type owl:DatatypeProperty ;
+    rdfs:domain stapi:Datastream ;
+    rdfs:range xsd:duration ;  # Typically an ISO 8601 time interval
+    rdfs:label "resultTime" ;
+    rdfs:comment "The temporal interval of the result times of all observations belonging to this Datastream." .
+
+stapi:observedArea rdf:type owl:DatatypeProperty ; # todo: double check to GEO envelope link?
+    rdfs:domain stapi:Datastream ;
+    rdfs:range xsd:string ;
+    rdfs:label "observedArea" ;
+    rdfs:comment "The spatial bounding box (typically a GM_Envelope in the form of a GeoJSON Polygon) of the spatial extent of all FeaturesOfInterest that belong to the Observations associated with this Datastream." .
+
+### Properties of Sensor
+
+stapi:encodingType rdf:type owl:DatatypeProperty ;
+    rdfs:domain stapi:Sensor ;
+    rdfs:range xsd:string ;
+    rdfs:label "encodingType" ;
+    rdfs:comment "The encoding type used for the metadata describing the Sensor (e.g., 'application/pdf')." .
+
+stapi:metadata rdf:type owl:DatatypeProperty ;
+    rdfs:domain stapi:Sensor ;
+    rdfs:range xsd:string ;
+    rdfs:label "metadata" ;
+    rdfs:comment "The actual metadata about the Sensor in the specified encoding type." .
+
+
+### Properties of ObservedProperty
+
+stapi:definition rdf:type owl:ObjectProperty ;
+    rdfs:domain stapi:ObservedProperty ;
+    rdfs:label "definition" ;
+    rdfs:comment "A URI that identifies the phenomenon being observed." .
+
+
+### Properties of Observation
+
+# PhenomenonTime
+stapi:phenomenonTime rdf:type owl:DatatypeProperty ; # needs mapping from string to dateTime
+    rdfs:domain stapi:Observation ;
+    rdfs:range xsd:dateTime ;  # Typically an ISO 8601 time
+    rdfs:label "phenomenonTime" ;
+    rdfs:comment "The time when the Observation was made." .
+
+# Result
+stapi:result rdf:type owl:DatatypeProperty ;
+    rdfs:domain stapi:Observation ;
+    rdfs:range rdfs:Literal ;  # Usually flexible type, so using string
+    rdfs:label "result" ;
+    rdfs:comment "The result of the Observation." .
+
+# ResultTime
+stapi:resultTime rdf:type owl:DatatypeProperty ; # needs mapping
+    rdfs:domain stapi:Observation ;
+    rdfs:range xsd:dateTime ;  # Typically an ISO 8601 time
+    rdfs:label "resultTime" ;
+    rdfs:comment "The time when the result became available." .
+
+# ResultQuality
+stapi:resultQuality rdf:type owl:DatatypeProperty ;
+    rdfs:domain stapi:Observation ;
+    rdfs:range xsd:string ;
+    rdfs:label "resultQuality" ;
+    rdfs:comment "A measure of the quality of the result (optional)." .
+
+# ValidTime
+stapi:validTime rdf:type owl:DatatypeProperty ; # needs mapping
+    rdfs:domain stapi:Observation ;
+    rdfs:range xsd:duration ;  # Typically an ISO 8601 time interval
+    rdfs:label "validTime" ;
+    rdfs:comment "The time period during which the result is valid." .
+
+# Parameters
+stapi:parameters rdf:type owl:DatatypeProperty ;
+    rdfs:domain stapi:Observation ;
+    rdfs:range xsd:string ;  # JSON object represented as string
+    rdfs:label "parameters" ;
+    rdfs:comment "Key-value pairs showing the environmental conditions during measurement." .
+
+### Properties of FeatureOfInterest
+
+# EncodingType
+stapi:encodingType rdf:type owl:DatatypeProperty ;
+    rdfs:domain stapi:FeatureOfInterest ;
+    rdfs:range xsd:string ;
+    rdfs:label "encodingType" ;
+    rdfs:comment "The encoding type used for the featureâ€™s spatial data (e.g., 'application/vnd.geo+json')." .
+
+# Feature
+stapi:feature rdf:type owl:DatatypeProperty ; # todo: further mapping for features
+    rdfs:domain stapi:FeatureOfInterest ;
+    rdfs:range xsd:string ;  # Typically a GeoJSON or similar string
+    rdfs:label "feature" ;
+    rdfs:comment "The actual spatial data of the FeatureOfInterest in the specified encoding type." .
+
+### Associations to other resources
