@@ -1,19 +1,20 @@
 {
-    "name": "SensorThingsAPI-pipeline",
+    "name": "hamburg-to-ldes-pipeline",
     "version": "0.0.1",
     "description": "RDF-Connect pipeline to ingest SensorThings API data into an LDES.",
     "main": "index.js",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/rdf-connect/SensorthingsAPI-pipeline.git"
+        "url": "git+https://github.com/rdf-connect/hamburg-to-ldes-pipeline"
     },
     "author": "Ruben Dedecker",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/rdf-connect/SensorThingsAPI-pipeline/issues"
+        "url": "https://github.com/rdf-connect/hamburg-to-ldes-pipeline/issues"
     },
     "scripts": {
-        "postinstall": "(cd processors/sds-storage-writer-ts && npm install && npm run build); (cd processors/sensorthings-api-fetcher-ts && npm install && npm run build); "
+        "postinstall": "(cd processors/sds-storage-writer-ts && npm install && npm run build); (cd processors/sensorthings-api-fetcher-ts && npm install && npm run build); ",
+        "test": ""
     },
     "dependencies": {
         "@rdfc/file-utils-processors-ts": "^1.0.0",
