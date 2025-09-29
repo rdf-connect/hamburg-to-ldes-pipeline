@@ -44,10 +44,8 @@ services:
   hamburg:
     container_name: pipeline
     build: ./pipeline
-    environment:
-      - URL=https://iot.hamburg.de/v1.1/Datastreams?$filter=properties/aggregateDuration%20eq%20%27P1D%27&$filter=properties/serviceName%20eq%20%27HH_STA_AutomatisierteVerkehrsmengenerfassung%27
-      - pageSize=500
-      - DEBUG=*
+    # environment:
+    #   - DATASTREAM=https://iot.hamburg.de/v1.1/Datastreams(12980)/Observations
     # volumes:
     #   - ./pipeline/state:/opt/pipeline/state
     logging:

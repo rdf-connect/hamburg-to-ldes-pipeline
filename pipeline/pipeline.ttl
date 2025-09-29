@@ -7,15 +7,10 @@
 ### Import runners and processors
 <> owl:imports <./node_modules/@rdfc/js-runner/index.ttl>.
 <> owl:imports <https://javadoc.jitpack.io/com/github/rdf-connect/jvm-runner/runner/master-SNAPSHOT/runner-master-SNAPSHOT-index.jar>.
-# <> owl:imports <./.venv/lib/python3.13/site-packages/rdfc_runner/index.ttl>.
-
 
 <> owl:imports <./node_modules/@rdfc/http-utils-processor-ts/processors.ttl>.
 <> owl:imports <./node_modules/@rdfc/log-processor-ts/processor.ttl>.
 <> owl:imports <./node_modules/@rdfc/file-utils-processors-ts/processors.ttl>.
-
-<> owl:imports <./processors/sensorthings-api-fetcher-ts/processor.ttl>.
-<> owl:imports <./processors/sparql-processor-ts/processor.ttl>.
 
 # <> owl:imports <./build/plugins/rml-processor-jvm-master-SNAPSHOT-all.jar>.
 <> owl:imports <./build/plugins/rml-processor-jvm-0.0.1-all.jar>.
@@ -23,9 +18,6 @@
 <> owl:imports <./node_modules/@rdfc/sds-processors-ts/configs/sdsify.ttl>.
 <> owl:imports <./node_modules/@rdfc/sds-processors-ts/configs/bucketizer.ttl>.
 <> owl:imports <./node_modules/@rdfc/sds-processors-ts/configs/ldes_disk_writer.ttl>.
-	
-<> owl:imports <./node_modules/@rdfc/sparql-ingest-processor-ts/processors.ttl>.
-# <> owl:imports <./.venv/lib/python3.13/site-packages/rdfc_translation_processor/processor.ttl>.
 
 <> owl:imports <./processors/sds-storage-writer-ts/processor.ttl>.
 
@@ -58,7 +50,7 @@
 
 # fetcher to get SensorThings API data
 <fetcher> a rdfc:SensorThingsFetcher;
-    rdfc:url "https://iot.hamburg.de/v1.1/Datastreams?$filter=properties/aggregateDuration%20eq%20%27P1D%27&$filter=properties/serviceName%20eq%20%27HH_STA_AutomatisierteVerkehrsmengenerfassung%27";
+    rdfc:datastream "https://iot.hamburg.de/v1.1/Datastreams(12980)";
     rdfc:writer <hamburg> .
 
 # Processor to read and stream out the RML mappings
@@ -233,8 +225,8 @@
     rdfc:dataInput <bucketized>;
     rdfc:metadataInput <bucketizedMetadata>;
     rdfc:database [ 
-        rdfc:url <mongodb://root:password@mongodb:27017/hamburg?authSource=admin>; # for docker environment
-        # rdfc:url <mongodb://localhost:27017/hamburg>; # for local testing
+        # rdfc:url <mongodb://root:password@mongodb:27017/hamburg?authSource=admin>; # for docker environment
+        rdfc:url <mongodb://localhost:27017/hamburg>; # for local testing
         rdfc:metadata "META";
         rdfc:data "DATA";
         rdfc:index "INDEX";
