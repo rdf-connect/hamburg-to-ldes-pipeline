@@ -225,8 +225,8 @@
     rdfc:dataInput <bucketized>;
     rdfc:metadataInput <bucketizedMetadata>;
     rdfc:database [ 
-        # rdfc:url <mongodb://root:password@mongodb:27017/hamburg?authSource=admin>; # for docker environment
-        rdfc:url <mongodb://localhost:27017/hamburg>; # for local testing
+        rdfc:url <mongodb://root:password@mongodb:27017/hamburg?authSource=admin>; # for docker environment
+        # rdfc:url <mongodb://localhost:27017/hamburg>; # for local testing
         rdfc:metadata "META";
         rdfc:data "DATA";
         rdfc:index "INDEX";
