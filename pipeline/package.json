@@ -13,7 +13,7 @@
         "url": "https://github.com/rdf-connect/hamburg-to-ldes-pipeline/issues"
     },
     "scripts": {
-        "postinstall": "(cd processors/sds-storage-writer-ts && npm install && npm run build); (cd processors/sensorthings-api-fetcher-ts && npm install && npm run build); ",
+        "postinstall": "(cd processors/sds-storage-writer-ts && npm install && npm run build); ",
         "test": ""
     },
     "dependencies": {
