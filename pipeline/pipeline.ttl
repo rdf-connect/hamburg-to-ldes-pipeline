@@ -1,6 +1,6 @@
 @prefix rdfc: <https://w3id.org/rdf-connect#>.
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
-@prefix stapi: <https://pod.rubendedecker.be/scholar/ontologies/stapi#> .
+@prefix stapi: <https://w3id.org/stapi#> .
 @prefix ex: <http://example.org/>.
 @prefix tree: <https://w3id.org/tree#>.
 
@@ -20,6 +20,7 @@
 <> owl:imports <./node_modules/@rdfc/sds-processors-ts/configs/ldes_disk_writer.ttl>.
 
 <> owl:imports <./processors/sds-storage-writer-ts/processor.ttl>.
+<> owl:imports <./node_modules/@rdfc/sensorthings-api-fetcher-ts/processor.ttl>.
 
 ### Define the channels
 <hamburg> a rdfc:Reader, rdfc:Writer.
@@ -38,7 +39,7 @@
 <> a rdfc:Pipeline;
    rdfc:consistsOf [
        rdfc:instantiates rdfc:NodeRunner;
-       rdfc:processor <fetcher>, <mappingReader>, <metadataReader>, <sdsify>, <bucketizer>, <ingest>, <logger>, <logger2>, <logger3>; 
+       rdfc:processor <fetcher>, <mappingReader>, <metadataReader>, <sdsify>, <bucketizer>, <ingest>, <logger>; 
    ], [
        rdfc:instantiates rdfc:JvmRunner;
        rdfc:processor <mapper>;
@@ -57,7 +58,7 @@
 <mappingReader> a rdfc:GlobRead;
     rdfc:glob <./mappings/stapi-to-rdf.rml.ttl>;
     rdfc:output <mappingData>;
-    rdfc:closeOnEnd false.
+    rdfc:closeOnEnd false .
 
 # Processor to do the RML mapping
 <mapper> a rdfc:RmlMapper;
@@ -84,10 +85,10 @@
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix stapi: <https://pod.rubendedecker.be/scholar/ontologies/stapi#> .
-@prefix tree: <https://w3id.org/tree#> .
+@prefix stapi: <https://w3id.org/stapi#> .
+@prefix : <http://example.org/> .
 @prefix geo: <http://www.opengis.net/ont/geosparql#> .
-@prefix : <https://example.org/ns#> .
+@prefix time: <http://www.w3.org/2006/time#> .
 
 #################################################################
 # Single NodeShape: Observation
@@ -96,13 +97,55 @@
     a sh:NodeShape ;
     sh:targetClass stapi:Observation ;
 
-    sh:property [ sh:path stapi:phenomenonTime ] ;
+    # sh:property [ sh:path stapi:phenomenonTime ] ;
     sh:property [ sh:path stapi:result ] ;
     sh:property [ sh:path stapi:resultTime ] ;
+    sh:property [
+        sh:path stapi:phenomenonTime ;
+        sh:node [
+            a sh:NodeShape ;
+            sh:targetClass time:Interval ;
+
+            # Beginning instant
+            sh:property [
+                sh:path time:hasBeginning ;
+                sh:node [
+                    a sh:NodeShape ;
+                    sh:targetClass time:Instant ;
+                    sh:property [
+                        sh:path time:inXSDDateTimeStamp ;
+                        sh:datatype xsd:dateTime ;
+                    ]
+                ] ;
+            ] ;
+
+            # End instant
+            sh:property [
+                sh:path time:hasEnd ;
+                sh:node [
+                    a sh:NodeShape ;
+                    sh:targetClass time:Instant ;
+                    sh:property [
+                        sh:path time:inXSDDateTimeStamp ;
+                        sh:datatype xsd:dateTime ;
+                    ]
+                ] ;
+            ] ;
+
+            # Optional duration
+            sh:property [
+                sh:path time:hasXSDDuration ;
+                sh:datatype xsd:duration ;
+                sh:maxCount 1 ;
+            ] ;
+        ] ;
+        sh:minCount 1 ;
+    ] ;
 
     #################################################################
     # Feature of Interest
     #################################################################
+
 
     sh:property [
         sh:path stapi:featureOfInterest ;
@@ -175,15 +218,10 @@
                         sh:path stapi:locations ;
                         sh:node [
                             a sh:NodeShape ;
-                            sh:property [ sh:path stapi:description ] ;
-                            sh:property [ sh:path stapi:name ] ;
                             sh:property [
                                 sh:path geo:hasGeometry ;
                                 sh:node [
                                     a sh:NodeShape ;
-                                    sh:property [ sh:path geo:asWKT ] ;
-                                    sh:property [ sh:path geo:lat ] ;
-                                    sh:property [ sh:path geo:long ] ;
                                 ] ;
                             ] ;
                             
@@ -194,13 +232,14 @@
         ] ;
     ] .
 
+
     """.
 
 # Processor to read and stream out the RML mappings
 <metadataReader> a rdfc:GlobRead;
     rdfc:glob <./metadata.ttl>;
     rdfc:output <metadata>;
-    rdfc:closeOnEnd false.
+    rdfc:closeOnEnd false .
 
 <bucketizer> a rdfc:Bucketize;
     rdfc:channels [
@@ -235,25 +274,12 @@
 
 
 
-###########
-# Logging #
-###########
-
-# Processor to log the output
-<logger3> a rdfc:LogProcessorJs;
-    rdfc:reader <hamburg>;
-    rdfc:level "info";
-    rdfc:label "hamburg".
-
-# Processor to log the output
-<logger2> a rdfc:LogProcessorJs;
-    rdfc:reader <sds>;
-    rdfc:level "info";
-    rdfc:label "sds".
-
+# ###########
+# # Logging #
+# ###########
 
 # Processor to log the output
 <logger> a rdfc:LogProcessorJs;
-    rdfc:reader <bucketized>;
+    rdfc:reader <hamburg>;
     rdfc:level "info";
     rdfc:label "out".

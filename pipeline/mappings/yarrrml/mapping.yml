@@ -1,9 +1,11 @@
 prefixes:
-  stapi: "https://pod.rubendedecker.be/scholar/ontologies/stapi#"
+  stapi: "https://w3id.org/stapi#"
   xsd: "http://www.w3.org/2001/XMLSchema#"
   rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
   geo: "http://www.opengis.net/ont/geosparql#"
   geosf: "http://www.opengis.net/ont/sf#"
+  time: "http://www.w3.org/2006/time#"
+  ex: "http://example.org/"
 
 mappings:
   observation:
@@ -12,12 +14,15 @@ mappings:
     s: $(['@iot.selfLink'])
     po:
       - [a, stapi:Observation]
-      - [stapi:phenomenonTime, $(phenomenonTime), xsd:duration]
       - [stapi:resultTime, $(resultTime), xsd:dateTime]
       - [stapi:result, $(result)]
       - [stapi:datastream, $(datastream)~iri]
       - [stapi:featureOfInterest, $(featureOfInterest)~iri ]
-
+      # Using the new temporal structure
+      - p: stapi:phenomenonTime
+        o:
+          mapping: phenomenonTime
+          
   datastream:
     sources:
       - ['data.json~jsonpath', '$.datastream']
@@ -32,7 +37,7 @@ mappings:
       - [stapi:phenomenonTime, $(phenomenonTime), xsd:duration]
       - [stapi:resultTime, $(resultTime), xsd:dateTime]
       # - [stapi:properties, $(properties), rdf:JSON]
-      # - [stapi:observation, $(observation)~iri ]
+    #   - [stapi:observation, $(observation)~iri ]
       - [stapi:observedProperty, $(observedProperty)~iri ]
       - [stapi:sensor, $(sensor)~iri ]
       - [stapi:thing, $(thing)~iri ]
@@ -97,8 +102,7 @@ mappings:
     sources:
       - ['data.json~jsonpath', '$.locations[*]']
     s: 
-       value: blank-$(['@iot.id'])-geo
-       type: blank
+       value: ex:$(['@iot.id'])-geo
     po:
       - [a, geo:Geometry]
       - [a, geosf:Point]
@@ -109,3 +113,39 @@ mappings:
       - p: geo:asWKT
         o: POINT\($(location.geometry.coordinates[0]) $(location.geometry.coordinates[1])\)
         datatype: geo:wktLiteral
+        
+        
+  phenomenonTime:
+    sources:
+      - ['data.json~jsonpath', '$.observation']
+    s:
+       value: ex:$(['@iot.id'])-phenom
+    po:
+      - [a, time:Interval] 
+      - p: time:hasBeginning
+        o:
+          mapping: phenomenonTime_begin
+      - p: time:hasEnd
+        o:
+          mapping: phenomenonTime_end
+      - [time:hasXSDDuration, $(phenomenonTime.hasXSDDuration), xsd:duration]
+
+  phenomenonTime_begin:
+    sources:
+      - ['data.json~jsonpath', '$.observation']
+    s:
+       value: ex:$(['@iot.id'])-phenom-start
+    po:
+      - [a, time:Instant]
+      - [time:inXSDDateTimeStamp, $(phenomenonTime.hasBeginning.inXSDDateTimeStamp), xsd:dateTime]
+
+  phenomenonTime_end:
+    sources:
+      - ['data.json~jsonpath', '$.observation']
+    s:
+       value: ex:$(['@iot.id'])-phenom-end
+    po:
+      - [a, time:Instant]
+      - [time:inXSDDateTimeStamp, $(phenomenonTime.hasEnd.inXSDDateTimeStamp), xsd:dateTime]
+
+

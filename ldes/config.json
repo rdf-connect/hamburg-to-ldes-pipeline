@@ -89,18 +89,6 @@
                         "@id": "urn:solid-server:default:repository"
                       }
                     }
-                  },
-                  {
-                    "@type": "PrefixView",
-                    "prefix": "indexed",
-                    "view": {
-                      "@type": "SDSView",
-                      "descriptionId": "http://localhost:3000/ldes/#timestampFragmentation",
-                      "streamId": "https://example.org/ns#",
-                      "repository": {
-                        "@id": "urn:solid-server:default:repository"
-                      }
-                    }
                   }
                 ]
               },

@@ -5,18 +5,18 @@
 @prefix prov:   <http://www.w3.org/ns/prov#> .
 @prefix sds:    <https://w3id.org/sds#> .
 @prefix dcat:   <https://www.w3.org/ns/dcat#> .
-@prefix ex:     <http://example.org/ns#>.
+@prefix ex:     <http://example.org/>.
 @prefix xsd:    <http://www.w3.org/2001/XMLSchema#>.
 @prefix sh:     <http://www.w3.org/ns/shacl#>.
 @prefix void:   <http://rdfs.org/ns/void#> .
 @prefix ldes:   <https://w3id.org/ldes#>.
 @prefix dct:    <http://purl.org/dc/terms/>.
-@prefix stapi:  <https://pod.rubendedecker.be/scholar/ontologies/stapi#> .
-@prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix tree: <https://w3id.org/tree#> .
-@prefix geo: <http://www.opengis.net/ont/geosparql#> .
-@prefix : <https://example.org/ns#> .
+@prefix stapi:  <https://w3id.org/stapi#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix tree:   <https://w3id.org/tree#> .
+@prefix geo:    <http://www.opengis.net/ont/geosparql#> .
+@prefix time:   <http://www.w3.org/2006/time#> .
+@prefix :       <http://example.org/> . 
 
 ex:somePlan
     a            p-plan:Plan ;
@@ -45,21 +45,63 @@ ex:HamburgObservationStream
     sh:targetClass stapi:Observation ;
 
     # sh:property [ sh:path stapi:phenomenonTime ] ;
-    # sh:property [ sh:path stapi:result ] ;
-    # sh:property [ sh:path stapi:resultTime ] ;
+    sh:property [ sh:path stapi:result ] ;
+    sh:property [ sh:path stapi:resultTime ] ;
+    sh:property [
+        sh:path stapi:phenomenonTime ;
+        sh:node [
+            a sh:NodeShape ;
+            sh:targetClass time:Interval ;
+
+            # Beginning instant
+            sh:property [
+                sh:path time:hasBeginning ;
+                sh:node [
+                    a sh:NodeShape ;
+                    sh:targetClass time:Instant ;
+                    sh:property [
+                        sh:path time:inXSDDateTimeStamp ;
+                        sh:datatype xsd:dateTime ;
+                    ]
+                ] ;
+            ] ;
+
+            # End instant
+            sh:property [
+                sh:path time:hasEnd ;
+                sh:node [
+                    a sh:NodeShape ;
+                    sh:targetClass time:Instant ;
+                    sh:property [
+                        sh:path time:inXSDDateTimeStamp ;
+                        sh:datatype xsd:dateTime ;
+                    ]
+                ] ;
+            ] ;
+
+            # Optional duration
+            sh:property [
+                sh:path time:hasXSDDuration ;
+                sh:datatype xsd:duration ;
+                sh:maxCount 1 ;
+            ] ;
+        ] ;
+        sh:minCount 1 ;
+    ] ;
 
     #################################################################
     # Feature of Interest
     #################################################################
 
+
     sh:property [
         sh:path stapi:featureOfInterest ;
         sh:node [
             a sh:NodeShape ;
-            # sh:property [ sh:path stapi:description ] ;
-            # sh:property [ sh:path stapi:encodingType ] ;
-            # sh:property [ sh:path stapi:feature ] ;
-            # sh:property [ sh:path stapi:name ] ;
+            sh:property [ sh:path stapi:description ] ;
+            sh:property [ sh:path stapi:encodingType ] ;
+            sh:property [ sh:path stapi:feature ] ;
+            sh:property [ sh:path stapi:name ] ;
         ] ;
     ] ;
 
@@ -70,14 +112,14 @@ ex:HamburgObservationStream
         sh:path stapi:datastream ;
         sh:node [
             a sh:NodeShape ;
-            # sh:property [ sh:path stapi:description ] ;
-            # sh:property [ sh:path stapi:name ] ;
-            # sh:property [ sh:path stapi:observationType ] ;
-            # sh:property [ sh:path stapi:observedArea ] ;
-            # sh:property [ sh:path stapi:phenomenonTime ] ;
-            # sh:property [ sh:path stapi:properties ] ;
-            # sh:property [ sh:path stapi:resultTime ] ;
-            # sh:property [ sh:path stapi:unitOfMeasurement ] ;
+            sh:property [ sh:path stapi:description ] ;
+            sh:property [ sh:path stapi:name ] ;
+            sh:property [ sh:path stapi:observationType ] ;
+            sh:property [ sh:path stapi:observedArea ] ;
+            sh:property [ sh:path stapi:phenomenonTime ] ;
+            sh:property [ sh:path stapi:properties ] ;
+            sh:property [ sh:path stapi:resultTime ] ;
+            sh:property [ sh:path stapi:unitOfMeasurement ] ;
 
             #################################################################
             # Observed Property
@@ -87,9 +129,9 @@ ex:HamburgObservationStream
                 sh:path stapi:observedProperty ;
                 sh:node [
                     a sh:NodeShape ;
-                    # sh:property [ sh:path stapi:definition ] ;
-                    # sh:property [ sh:path stapi:description ] ;
-                    # sh:property [ sh:path stapi:name ] ;
+                    sh:property [ sh:path stapi:definition ] ;
+                    sh:property [ sh:path stapi:description ] ;
+                    sh:property [ sh:path stapi:name ] ;
                 ] ;
             ] ;
             
@@ -101,10 +143,10 @@ ex:HamburgObservationStream
                 sh:path stapi:sensor ;
                 sh:node [
                     a sh:NodeShape ;
-                    # sh:property [ sh:path stapi:description ] ;
-                    # sh:property [ sh:path stapi:encodingType ] ;
-                    # sh:property [ sh:path stapi:metadata ] ;
-                    # sh:property [ sh:path stapi:name ] ;
+                    sh:property [ sh:path stapi:description ] ;
+                    sh:property [ sh:path stapi:encodingType ] ;
+                    sh:property [ sh:path stapi:metadata ] ;
+                    sh:property [ sh:path stapi:name ] ;
                 ] ;
             ] ;
 
@@ -116,9 +158,9 @@ ex:HamburgObservationStream
                 sh:path stapi:thing ;
                 sh:node [
                     a sh:NodeShape ;
-                    # sh:property [ sh:path stapi:description ] ;
-                    # sh:property [ sh:path stapi:name ] ;
-                    # sh:property [ sh:path stapi:properties ] ;
+                    sh:property [ sh:path stapi:description ] ;
+                    sh:property [ sh:path stapi:name ] ;
+                    sh:property [ sh:path stapi:properties ] ;
                     sh:property [
                         sh:path stapi:locations ;
                         sh:node [
@@ -136,4 +178,3 @@ ex:HamburgObservationStream
             ] ;
         ] ;
     ] .
-    

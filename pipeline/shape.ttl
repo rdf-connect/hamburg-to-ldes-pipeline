@@ -1,9 +1,10 @@
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix stapi: <https://pod.rubendedecker.be/scholar/ontologies/stapi#> .
-@prefix : <https://example.org/ns#> .
+@prefix stapi: <https://w3id.org/stapi#> .
+@prefix : <http://example.org/> .
 @prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix time: <http://www.w3.org/2006/time#> .
 
 #################################################################
 # Single NodeShape: Observation
@@ -12,13 +13,55 @@
     a sh:NodeShape ;
     sh:targetClass stapi:Observation ;
 
-    sh:property [ sh:path stapi:phenomenonTime ] ;
+    # sh:property [ sh:path stapi:phenomenonTime ] ;
     sh:property [ sh:path stapi:result ] ;
     sh:property [ sh:path stapi:resultTime ] ;
+    sh:property [
+        sh:path stapi:phenomenonTime ;
+        sh:node [
+            a sh:NodeShape ;
+            sh:targetClass time:Interval ;
+
+            # Beginning instant
+            sh:property [
+                sh:path time:hasBeginning ;
+                sh:node [
+                    a sh:NodeShape ;
+                    sh:targetClass time:Instant ;
+                    sh:property [
+                        sh:path time:inXSDDateTimeStamp ;
+                        sh:datatype xsd:dateTime ;
+                    ]
+                ] ;
+            ] ;
+
+            # End instant
+            sh:property [
+                sh:path time:hasEnd ;
+                sh:node [
+                    a sh:NodeShape ;
+                    sh:targetClass time:Instant ;
+                    sh:property [
+                        sh:path time:inXSDDateTimeStamp ;
+                        sh:datatype xsd:dateTime ;
+                    ]
+                ] ;
+            ] ;
+
+            # Optional duration
+            sh:property [
+                sh:path time:hasXSDDuration ;
+                sh:datatype xsd:duration ;
+                sh:maxCount 1 ;
+            ] ;
+        ] ;
+        sh:minCount 1 ;
+    ] ;
 
     #################################################################
     # Feature of Interest
     #################################################################
+
 
     sh:property [
         sh:path stapi:featureOfInterest ;
