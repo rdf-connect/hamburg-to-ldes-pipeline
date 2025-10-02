@@ -21,25 +21,25 @@
 map:map_datastream_000 rml:logicalSource map:source_001 ;
 	rdf:type rr:TriplesMap ;
 	rdfs:label "datastream" ;
-	rr:predicateObjectMap map:pom_006, map:pom_007, map:pom_008, map:pom_009, map:pom_010, map:pom_011, map:pom_012, map:pom_013, map:pom_014, map:pom_015, map:pom_016 ;
+	rr:predicateObjectMap map:pom_006, map:pom_007, map:pom_008, map:pom_009, map:pom_010, map:pom_011, map:pom_012, map:pom_013, map:pom_014 ;
 	rr:subjectMap map:s_001 .
 
 map:map_featureOfInterest_000 rml:logicalSource map:source_005 ;
 	rdf:type rr:TriplesMap ;
 	rdfs:label "featureOfInterest" ;
-	rr:predicateObjectMap map:pom_030, map:pom_031, map:pom_032, map:pom_033, map:pom_034 ;
+	rr:predicateObjectMap map:pom_028, map:pom_029, map:pom_030, map:pom_031, map:pom_032 ;
 	rr:subjectMap map:s_005 .
 
 map:map_geomapping_000 rml:logicalSource map:source_007 ;
 	rdf:type rr:TriplesMap ;
 	rdfs:label "geomapping" ;
-	rr:predicateObjectMap map:pom_039, map:pom_040, map:pom_041, map:pom_042, map:pom_043 ;
+	rr:predicateObjectMap map:pom_037, map:pom_038, map:pom_039, map:pom_040, map:pom_041 ;
 	rr:subjectMap map:s_007 .
 
 map:map_location_000 rml:logicalSource map:source_006 ;
 	rdf:type rr:TriplesMap ;
 	rdfs:label "location" ;
-	rr:predicateObjectMap map:pom_035, map:pom_036, map:pom_037, map:pom_038 ;
+	rr:predicateObjectMap map:pom_033, map:pom_034, map:pom_035, map:pom_036 ;
 	rr:subjectMap map:s_006 .
 
 map:map_observation_000 rml:logicalSource map:source_000 ;
@@ -51,37 +51,37 @@ map:map_observation_000 rml:logicalSource map:source_000 ;
 map:map_observedProperty_000 rml:logicalSource map:source_003 ;
 	rdf:type rr:TriplesMap ;
 	rdfs:label "observedProperty" ;
-	rr:predicateObjectMap map:pom_021, map:pom_022, map:pom_023, map:pom_024 ;
+	rr:predicateObjectMap map:pom_019, map:pom_020, map:pom_021, map:pom_022 ;
 	rr:subjectMap map:s_003 .
 
 map:map_phenomenonTime_000 rml:logicalSource map:source_008 ;
 	rdf:type rr:TriplesMap ;
 	rdfs:label "phenomenonTime" ;
-	rr:predicateObjectMap map:pom_044, map:pom_045, map:pom_046, map:pom_047 ;
+	rr:predicateObjectMap map:pom_042, map:pom_043, map:pom_044, map:pom_045 ;
 	rr:subjectMap map:s_008 .
 
 map:map_phenomenonTime_begin_000 rml:logicalSource map:source_009 ;
 	rdf:type rr:TriplesMap ;
 	rdfs:label "phenomenonTime_begin" ;
-	rr:predicateObjectMap map:pom_048, map:pom_049 ;
+	rr:predicateObjectMap map:pom_046, map:pom_047 ;
 	rr:subjectMap map:s_009 .
 
 map:map_phenomenonTime_end_000 rml:logicalSource map:source_010 ;
 	rdf:type rr:TriplesMap ;
 	rdfs:label "phenomenonTime_end" ;
-	rr:predicateObjectMap map:pom_050, map:pom_051 ;
+	rr:predicateObjectMap map:pom_048, map:pom_049 ;
 	rr:subjectMap map:s_010 .
 
 map:map_sensor_000 rml:logicalSource map:source_004 ;
 	rdf:type rr:TriplesMap ;
 	rdfs:label "sensor" ;
-	rr:predicateObjectMap map:pom_025, map:pom_026, map:pom_027, map:pom_028, map:pom_029 ;
+	rr:predicateObjectMap map:pom_023, map:pom_024, map:pom_025, map:pom_026, map:pom_027 ;
 	rr:subjectMap map:s_004 .
 
 map:map_thing_000 rml:logicalSource map:source_002 ;
 	rdf:type rr:TriplesMap ;
 	rdfs:label "thing" ;
-	rr:predicateObjectMap map:pom_017, map:pom_018, map:pom_019, map:pom_020 ;
+	rr:predicateObjectMap map:pom_015, map:pom_016, map:pom_017, map:pom_018 ;
 	rr:subjectMap map:s_002 .
 
 map:om_000 rdf:type rr:ObjectMap ;
@@ -131,172 +131,162 @@ map:om_010 rml:reference "observedArea" ;
 	rr:datatype rdf:JSON ;
 	rr:termType rr:Literal .
 
-map:om_011 rml:reference "phenomenonTime" ;
-	rdf:type rr:ObjectMap ;
-	rr:datatype xsd:duration ;
-	rr:termType rr:Literal .
-
-map:om_012 rml:reference "resultTime" ;
-	rdf:type rr:ObjectMap ;
-	rr:datatype xsd:dateTime ;
-	rr:termType rr:Literal .
-
-map:om_013 rml:reference "observedProperty" ;
+map:om_011 rml:reference "observedProperty" ;
 	rdf:type rr:ObjectMap ;
 	rr:termType rr:IRI .
 
-map:om_014 rml:reference "sensor" ;
+map:om_012 rml:reference "sensor" ;
 	rdf:type rr:ObjectMap ;
 	rr:termType rr:IRI .
 
-map:om_015 rml:reference "thing" ;
+map:om_013 rml:reference "thing" ;
 	rdf:type rr:ObjectMap ;
 	rr:termType rr:IRI .
 
-map:om_016 rdf:type rr:ObjectMap ;
+map:om_014 rdf:type rr:ObjectMap ;
 	rr:constant stapi:Thing ;
 	rr:termType rr:IRI .
 
-map:om_017 rml:reference "name" ;
+map:om_015 rml:reference "name" ;
 	rdf:type rr:ObjectMap ;
 	rr:termType rr:Literal .
 
-map:om_018 rml:reference "description" ;
+map:om_016 rml:reference "description" ;
 	rdf:type rr:ObjectMap ;
 	rr:termType rr:Literal .
 
-map:om_019 rml:reference "locations" ;
+map:om_017 rml:reference "locations" ;
 	rdf:type rr:ObjectMap ;
 	rr:termType rr:IRI .
 
-map:om_020 rdf:type rr:ObjectMap ;
+map:om_018 rdf:type rr:ObjectMap ;
 	rr:constant stapi:ObservedProperty ;
 	rr:termType rr:IRI .
 
-map:om_021 rml:reference "name" ;
+map:om_019 rml:reference "name" ;
 	rdf:type rr:ObjectMap ;
 	rr:termType rr:Literal .
 
-map:om_022 rml:reference "description" ;
+map:om_020 rml:reference "description" ;
 	rdf:type rr:ObjectMap ;
 	rr:termType rr:Literal .
 
-map:om_023 rml:reference "definition" ;
+map:om_021 rml:reference "definition" ;
 	rdf:type rr:ObjectMap ;
 	rr:termType rr:Literal .
 
-map:om_024 rdf:type rr:ObjectMap ;
+map:om_022 rdf:type rr:ObjectMap ;
 	rr:constant stapi:Sensor ;
 	rr:termType rr:IRI .
 
-map:om_025 rml:reference "name" ;
+map:om_023 rml:reference "name" ;
 	rdf:type rr:ObjectMap ;
 	rr:termType rr:Literal .
 
-map:om_026 rml:reference "description" ;
+map:om_024 rml:reference "description" ;
 	rdf:type rr:ObjectMap ;
 	rr:termType rr:Literal .
 
-map:om_027 rml:reference "encodingType" ;
+map:om_025 rml:reference "encodingType" ;
 	rdf:type rr:ObjectMap ;
 	rr:termType rr:Literal .
 
-map:om_028 rml:reference "metadata" ;
+map:om_026 rml:reference "metadata" ;
 	rdf:type rr:ObjectMap ;
 	rr:datatype rdf:JSON ;
 	rr:termType rr:Literal .
 
-map:om_029 rdf:type rr:ObjectMap ;
+map:om_027 rdf:type rr:ObjectMap ;
 	rr:constant stapi:FeatureOfInterest ;
 	rr:termType rr:IRI .
 
-map:om_030 rml:reference "name" ;
+map:om_028 rml:reference "name" ;
 	rdf:type rr:ObjectMap ;
 	rr:termType rr:Literal .
 
-map:om_031 rml:reference "description" ;
+map:om_029 rml:reference "description" ;
 	rdf:type rr:ObjectMap ;
 	rr:termType rr:Literal .
 
-map:om_032 rml:reference "encodingType" ;
+map:om_030 rml:reference "encodingType" ;
 	rdf:type rr:ObjectMap ;
 	rr:termType rr:Literal .
 
-map:om_033 rml:reference "feature" ;
+map:om_031 rml:reference "feature" ;
 	rdf:type rr:ObjectMap ;
 	rr:datatype rdf:JSON ;
 	rr:termType rr:Literal .
 
-map:om_034 rdf:type rr:ObjectMap ;
+map:om_032 rdf:type rr:ObjectMap ;
 	rr:constant stapi:Location ;
 	rr:termType rr:IRI .
 
-map:om_035 rml:reference "name" ;
+map:om_033 rml:reference "name" ;
 	rdf:type rr:ObjectMap ;
 	rr:termType rr:Literal .
 
-map:om_036 rml:reference "description" ;
+map:om_034 rml:reference "description" ;
 	rdf:type rr:ObjectMap ;
 	rr:termType rr:Literal .
 
-map:om_037 rdf:type rr:ObjectMap ;
+map:om_035 rdf:type rr:ObjectMap ;
 	rr:constant geo:Geometry ;
 	rr:termType rr:IRI .
 
-map:om_038 rdf:type rr:ObjectMap ;
+map:om_036 rdf:type rr:ObjectMap ;
 	rr:constant geosf:Point ;
 	rr:termType rr:IRI .
 
-map:om_039 rml:reference "location.geometry.coordinates[1]" ;
+map:om_037 rml:reference "location.geometry.coordinates[1]" ;
 	rdf:type rr:ObjectMap ;
 	rr:termType rr:Literal .
 
-map:om_040 rml:reference "location.geometry.coordinates[0]" ;
+map:om_038 rml:reference "location.geometry.coordinates[0]" ;
 	rdf:type rr:ObjectMap ;
 	rr:termType rr:Literal .
 
-map:om_041 rdf:type rr:ObjectMap ;
+map:om_039 rdf:type rr:ObjectMap ;
 	rr:datatype geo:wktLiteral ;
 	rr:template "POINT({location.geometry.coordinates[0]} {location.geometry.coordinates[1]})" ;
 	rr:termType rr:Literal .
 
-map:om_042 rdf:type rr:ObjectMap ;
+map:om_040 rdf:type rr:ObjectMap ;
 	rr:constant time:Interval ;
 	rr:termType rr:IRI .
 
-map:om_043 rml:reference "phenomenonTime.hasXSDDuration" ;
+map:om_041 rml:reference "phenomenonTime.hasXSDDuration" ;
 	rdf:type rr:ObjectMap ;
 	rr:datatype xsd:duration ;
+	rr:termType rr:Literal .
+
+map:om_042 rdf:type rr:ObjectMap ;
+	rr:constant time:Instant ;
+	rr:termType rr:IRI .
+
+map:om_043 rml:reference "phenomenonTime.hasBeginning.inXSDDateTimeStamp" ;
+	rdf:type rr:ObjectMap ;
+	rr:datatype xsd:dateTime ;
 	rr:termType rr:Literal .
 
 map:om_044 rdf:type rr:ObjectMap ;
 	rr:constant time:Instant ;
 	rr:termType rr:IRI .
 
-map:om_045 rml:reference "phenomenonTime.hasBeginning.inXSDDateTimeStamp" ;
+map:om_045 rml:reference "phenomenonTime.hasEnd.inXSDDateTimeStamp" ;
 	rdf:type rr:ObjectMap ;
 	rr:datatype xsd:dateTime ;
 	rr:termType rr:Literal .
 
 map:om_046 rdf:type rr:ObjectMap ;
-	rr:constant time:Instant ;
-	rr:termType rr:IRI .
-
-map:om_047 rml:reference "phenomenonTime.hasEnd.inXSDDateTimeStamp" ;
-	rdf:type rr:ObjectMap ;
-	rr:datatype xsd:dateTime ;
-	rr:termType rr:Literal .
-
-map:om_048 rdf:type rr:ObjectMap ;
 	rr:parentTriplesMap map:map_phenomenonTime_000 .
 
-map:om_049 rdf:type rr:ObjectMap ;
+map:om_047 rdf:type rr:ObjectMap ;
 	rr:parentTriplesMap map:map_geomapping_000 .
 
-map:om_050 rdf:type rr:ObjectMap ;
+map:om_048 rdf:type rr:ObjectMap ;
 	rr:parentTriplesMap map:map_phenomenonTime_begin_000 .
 
-map:om_051 rdf:type rr:ObjectMap ;
+map:om_049 rdf:type rr:ObjectMap ;
 	rr:parentTriplesMap map:map_phenomenonTime_end_000 .
 
 map:pm_000 rdf:type rr:PredicateMap ;
@@ -336,123 +326,117 @@ map:pm_011 rdf:type rr:PredicateMap ;
 	rr:constant stapi:observedArea .
 
 map:pm_012 rdf:type rr:PredicateMap ;
-	rr:constant stapi:phenomenonTime .
-
-map:pm_013 rdf:type rr:PredicateMap ;
-	rr:constant stapi:resultTime .
-
-map:pm_014 rdf:type rr:PredicateMap ;
 	rr:constant stapi:observedProperty .
 
-map:pm_015 rdf:type rr:PredicateMap ;
+map:pm_013 rdf:type rr:PredicateMap ;
 	rr:constant stapi:sensor .
 
-map:pm_016 rdf:type rr:PredicateMap ;
+map:pm_014 rdf:type rr:PredicateMap ;
 	rr:constant stapi:thing .
 
-map:pm_017 rdf:type rr:PredicateMap ;
+map:pm_015 rdf:type rr:PredicateMap ;
 	rr:constant rdf:type .
+
+map:pm_016 rdf:type rr:PredicateMap ;
+	rr:constant stapi:name .
+
+map:pm_017 rdf:type rr:PredicateMap ;
+	rr:constant stapi:description .
 
 map:pm_018 rdf:type rr:PredicateMap ;
-	rr:constant stapi:name .
-
-map:pm_019 rdf:type rr:PredicateMap ;
-	rr:constant stapi:description .
-
-map:pm_020 rdf:type rr:PredicateMap ;
 	rr:constant stapi:locations .
 
-map:pm_021 rdf:type rr:PredicateMap ;
+map:pm_019 rdf:type rr:PredicateMap ;
 	rr:constant rdf:type .
+
+map:pm_020 rdf:type rr:PredicateMap ;
+	rr:constant stapi:name .
+
+map:pm_021 rdf:type rr:PredicateMap ;
+	rr:constant stapi:description .
 
 map:pm_022 rdf:type rr:PredicateMap ;
-	rr:constant stapi:name .
-
-map:pm_023 rdf:type rr:PredicateMap ;
-	rr:constant stapi:description .
-
-map:pm_024 rdf:type rr:PredicateMap ;
 	rr:constant stapi:definition .
 
-map:pm_025 rdf:type rr:PredicateMap ;
+map:pm_023 rdf:type rr:PredicateMap ;
 	rr:constant rdf:type .
+
+map:pm_024 rdf:type rr:PredicateMap ;
+	rr:constant stapi:name .
+
+map:pm_025 rdf:type rr:PredicateMap ;
+	rr:constant stapi:description .
 
 map:pm_026 rdf:type rr:PredicateMap ;
-	rr:constant stapi:name .
+	rr:constant stapi:encodingType .
 
 map:pm_027 rdf:type rr:PredicateMap ;
-	rr:constant stapi:description .
-
-map:pm_028 rdf:type rr:PredicateMap ;
-	rr:constant stapi:encodingType .
-
-map:pm_029 rdf:type rr:PredicateMap ;
 	rr:constant stapi:metadata .
 
-map:pm_030 rdf:type rr:PredicateMap ;
+map:pm_028 rdf:type rr:PredicateMap ;
 	rr:constant rdf:type .
+
+map:pm_029 rdf:type rr:PredicateMap ;
+	rr:constant stapi:name .
+
+map:pm_030 rdf:type rr:PredicateMap ;
+	rr:constant stapi:description .
 
 map:pm_031 rdf:type rr:PredicateMap ;
-	rr:constant stapi:name .
-
-map:pm_032 rdf:type rr:PredicateMap ;
-	rr:constant stapi:description .
-
-map:pm_033 rdf:type rr:PredicateMap ;
 	rr:constant stapi:encodingType .
 
-map:pm_034 rdf:type rr:PredicateMap ;
+map:pm_032 rdf:type rr:PredicateMap ;
 	rr:constant stapi:feature .
 
-map:pm_035 rdf:type rr:PredicateMap ;
+map:pm_033 rdf:type rr:PredicateMap ;
 	rr:constant rdf:type .
 
-map:pm_036 rdf:type rr:PredicateMap ;
+map:pm_034 rdf:type rr:PredicateMap ;
 	rr:constant stapi:name .
 
-map:pm_037 rdf:type rr:PredicateMap ;
+map:pm_035 rdf:type rr:PredicateMap ;
 	rr:constant stapi:description .
 
-map:pm_038 rdf:type rr:PredicateMap ;
+map:pm_036 rdf:type rr:PredicateMap ;
 	rr:constant geo:hasGeometry .
 
+map:pm_037 rdf:type rr:PredicateMap ;
+	rr:constant rdf:type .
+
+map:pm_038 rdf:type rr:PredicateMap ;
+	rr:constant rdf:type .
+
 map:pm_039 rdf:type rr:PredicateMap ;
-	rr:constant rdf:type .
-
-map:pm_040 rdf:type rr:PredicateMap ;
-	rr:constant rdf:type .
-
-map:pm_041 rdf:type rr:PredicateMap ;
 	rr:constant geo:lat .
 
-map:pm_042 rdf:type rr:PredicateMap ;
+map:pm_040 rdf:type rr:PredicateMap ;
 	rr:constant geo:long .
 
-map:pm_043 rdf:type rr:PredicateMap ;
+map:pm_041 rdf:type rr:PredicateMap ;
 	rr:constant geo:asWKT .
 
-map:pm_044 rdf:type rr:PredicateMap ;
+map:pm_042 rdf:type rr:PredicateMap ;
 	rr:constant rdf:type .
 
-map:pm_045 rdf:type rr:PredicateMap ;
+map:pm_043 rdf:type rr:PredicateMap ;
 	rr:constant time:hasBeginning .
 
-map:pm_046 rdf:type rr:PredicateMap ;
+map:pm_044 rdf:type rr:PredicateMap ;
 	rr:constant time:hasEnd .
 
-map:pm_047 rdf:type rr:PredicateMap ;
+map:pm_045 rdf:type rr:PredicateMap ;
 	rr:constant time:hasXSDDuration .
+
+map:pm_046 rdf:type rr:PredicateMap ;
+	rr:constant rdf:type .
+
+map:pm_047 rdf:type rr:PredicateMap ;
+	rr:constant time:inXSDDateTimeStamp .
 
 map:pm_048 rdf:type rr:PredicateMap ;
 	rr:constant rdf:type .
 
 map:pm_049 rdf:type rr:PredicateMap ;
-	rr:constant time:inXSDDateTimeStamp .
-
-map:pm_050 rdf:type rr:PredicateMap ;
-	rr:constant rdf:type .
-
-map:pm_051 rdf:type rr:PredicateMap ;
 	rr:constant time:inXSDDateTimeStamp .
 
 map:pom_000 rdf:type rr:PredicateObjectMap ;
@@ -476,7 +460,7 @@ map:pom_004 rdf:type rr:PredicateObjectMap ;
 	rr:predicateMap map:pm_004 .
 
 map:pom_005 rdf:type rr:PredicateObjectMap ;
-	rr:objectMap map:om_048 ;
+	rr:objectMap map:om_046 ;
 	rr:predicateMap map:pm_005 .
 
 map:pom_006 rdf:type rr:PredicateObjectMap ;
@@ -600,15 +584,15 @@ map:pom_035 rdf:type rr:PredicateObjectMap ;
 	rr:predicateMap map:pm_035 .
 
 map:pom_036 rdf:type rr:PredicateObjectMap ;
-	rr:objectMap map:om_035 ;
+	rr:objectMap map:om_047 ;
 	rr:predicateMap map:pm_036 .
 
 map:pom_037 rdf:type rr:PredicateObjectMap ;
-	rr:objectMap map:om_036 ;
+	rr:objectMap map:om_035 ;
 	rr:predicateMap map:pm_037 .
 
 map:pom_038 rdf:type rr:PredicateObjectMap ;
-	rr:objectMap map:om_049 ;
+	rr:objectMap map:om_036 ;
 	rr:predicateMap map:pm_038 .
 
 map:pom_039 rdf:type rr:PredicateObjectMap ;
@@ -628,19 +612,19 @@ map:pom_042 rdf:type rr:PredicateObjectMap ;
 	rr:predicateMap map:pm_042 .
 
 map:pom_043 rdf:type rr:PredicateObjectMap ;
-	rr:objectMap map:om_041 ;
+	rr:objectMap map:om_048 ;
 	rr:predicateMap map:pm_043 .
 
 map:pom_044 rdf:type rr:PredicateObjectMap ;
-	rr:objectMap map:om_042 ;
+	rr:objectMap map:om_049 ;
 	rr:predicateMap map:pm_044 .
 
 map:pom_045 rdf:type rr:PredicateObjectMap ;
-	rr:objectMap map:om_050 ;
+	rr:objectMap map:om_041 ;
 	rr:predicateMap map:pm_045 .
 
 map:pom_046 rdf:type rr:PredicateObjectMap ;
-	rr:objectMap map:om_051 ;
+	rr:objectMap map:om_042 ;
 	rr:predicateMap map:pm_046 .
 
 map:pom_047 rdf:type rr:PredicateObjectMap ;
@@ -654,14 +638,6 @@ map:pom_048 rdf:type rr:PredicateObjectMap ;
 map:pom_049 rdf:type rr:PredicateObjectMap ;
 	rr:objectMap map:om_045 ;
 	rr:predicateMap map:pm_049 .
-
-map:pom_050 rdf:type rr:PredicateObjectMap ;
-	rr:objectMap map:om_046 ;
-	rr:predicateMap map:pm_050 .
-
-map:pom_051 rdf:type rr:PredicateObjectMap ;
-	rr:objectMap map:om_047 ;
-	rr:predicateMap map:pm_051 .
 
 map:rules_000 <http://rdfs.org/ns/void#exampleResource> map:map_datastream_000, map:map_featureOfInterest_000, map:map_geomapping_000, map:map_location_000, map:map_observation_000, map:map_observedProperty_000, map:map_phenomenonTime_000, map:map_phenomenonTime_begin_000, map:map_phenomenonTime_end_000, map:map_sensor_000, map:map_thing_000 ;
 	rdf:type <http://rdfs.org/ns/void#Dataset> .
@@ -688,16 +664,16 @@ map:s_006 rml:reference "['@iot.selfLink']" ;
 	rdf:type rr:SubjectMap .
 
 map:s_007 rdf:type rr:SubjectMap ;
-	rr:template "http://example.org/{['@iot.id']}-geo" .
+	rr:template "http://example.org/ns#{['@iot.id']}-geo" .
 
 map:s_008 rdf:type rr:SubjectMap ;
-	rr:template "http://example.org/{['@iot.id']}-phenom" .
+	rr:template "http://example.org/ns#{['@iot.id']}-phenom" .
 
 map:s_009 rdf:type rr:SubjectMap ;
-	rr:template "http://example.org/{['@iot.id']}-phenom-start" .
+	rr:template "http://example.org/ns#{['@iot.id']}-phenom-start" .
 
 map:s_010 rdf:type rr:SubjectMap ;
-	rr:template "http://example.org/{['@iot.id']}-phenom-end" .
+	rr:template "http://example.org/ns#{['@iot.id']}-phenom-end" .
 
 
 

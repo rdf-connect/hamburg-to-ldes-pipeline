@@ -41,7 +41,7 @@ services:
       - ldes
     depends_on:
       - mongodb
-  hamburg:
+  hamburg_server:
     container_name: pipeline
     build: ./pipeline
     # environment:
