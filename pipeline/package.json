@@ -23,7 +23,7 @@
         "@rdfc/log-processor-ts": "^2.0.0",
         "@rdfc/orchestrator-js": "^1.0.6",
         "@rdfc/sds-processors-ts": "^2.0.0",
-        "@rdfc/sensorthings-api-fetcher-ts": "^0.1.2",
+        "@rdfc/sensorthings-api-fetcher-ts": "^0.1.5",
         "@rdfc/shacl-processor-ts": "^1.0.0"
     }
 }

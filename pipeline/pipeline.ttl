@@ -21,6 +21,7 @@
 
 <> owl:imports <./processors/sds-storage-writer-ts/processor.ttl>.
 <> owl:imports <./node_modules/@rdfc/sensorthings-api-fetcher-ts/processor.ttl>.
+# <> owl:imports <../../processors/sensorthings-api-fetcher-ts/processor.ttl>.
 
 ### Define the channels
 <hamburg> a rdfc:Reader, rdfc:Writer.
@@ -51,8 +52,9 @@
 
 # fetcher to get SensorThings API data
 <fetcher> a rdfc:SensorThingsFetcher;
-    rdfc:datastream "https://iot.hamburg.de/v1.1/Datastreams(12980)";
-    rdfc:writer <hamburg> .
+    rdfc:datastream "https://iot.hamburg.de/v1.1/Datastreams(26110)";
+    rdfc:writer <hamburg> ;
+    rdfc:mqttURL "mqtt://tld.iot.hamburg.de:1883".
 
 # Processor to read and stream out the RML mappings
 <mappingReader> a rdfc:GlobRead;
