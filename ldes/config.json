@@ -126,6 +126,14 @@
       {
         "@id": "urn:solid-server:default:relative-path",
         "valueRaw": "/ldes/"
+      },
+      {
+        "@id": "urn:solid-server:default:TargetExtractor",
+        "OriginalUrlExtractor:_args_fixedBaseUrl": { "@id": "urn:solid-server:default:variable:baseUrl" }
+      },
+      {
+        "@id": "urn:solid-server:default:DPoPUrlExtractor",
+        "OriginalUrlExtractor:_args_fixedBaseUrl": { "@id": "urn:solid-server:default:variable:baseUrl" }
       }
     ]
   }
