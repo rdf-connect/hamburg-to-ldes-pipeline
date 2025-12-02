@@ -7,7 +7,9 @@ repositories {
     maven { url = uri("https://jitpack.io") }  // if your processors are on GitHub
 }
 dependencies {
-    implementation("com.github.rdf-connect:rml-processor-jvm:master-SNAPSHOT:all")
+    implementation("com.github.rdf-connect.jvm-runner:runner:master-SNAPSHOT:index")
+    // implementation("com.github.rdf-connect:rml-processor-jvm:master-SNAPSHOT:all")
+    implementation("com.github.rdf-connect:rml-processor-jvm:569e589:all")
 }
 
 tasks.register('copyPlugins', Copy) {
@@ -18,3 +20,5 @@ tasks.register('copyPlugins', Copy) {
 configurations.all {
     resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
 }
+
+

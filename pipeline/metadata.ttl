@@ -28,10 +28,10 @@ ex:HamburgObservationStream
                             rdfs:comment "Load in Hamburg Observation data" ] ;
     sds:carries           [ a sds:Member ] ;
     sds:dataset           [ a                  dcat:Dataset ;
-                            dcat:title         "LDES of Hamburg Observations" ;
+                            dcat:title         "LDES of Hamburg Observations of Datastreams" ;
                             dcat:publisher     <http://pod.rubendedecker.be/profile/card#me> ;
                             ldes:timestampPath stapi:phenomenonTime ;
-                            dcat:identifier    <http://ldes-server:3000/hamburg> 
+                            dcat:identifier    <http://ldes-server:3000/ldes/> 
                           ] ;
     sds:shape             :ObservationShape;
     tree:shape            :ObservationShape.

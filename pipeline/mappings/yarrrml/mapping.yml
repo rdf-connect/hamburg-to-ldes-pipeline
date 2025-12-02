@@ -2,7 +2,8 @@ prefixes:
   stapi: "https://w3id.org/stapi#"
   xsd: "http://www.w3.org/2001/XMLSchema#"
   rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-  geo: "http://www.opengis.net/ont/geosparql#"
+  geo: "http://www.w3.org/2003/01/geo/wgs84_pos#"
+  geosparql: "http://www.opengis.net/ont/geosparql#"
   geosf: "http://www.opengis.net/ont/sf#"
   time: "http://www.w3.org/2006/time#"
   ex: "http://example.org/"
@@ -94,7 +95,7 @@ mappings:
       - [a, stapi:Location]
       - [stapi:name, $(name)]
       - [stapi:description, $(description)]
-      - p: geo:hasGeometry
+      - p: geosparql:hasGeometry
         o:
           mapping: geomapping        
              
@@ -104,15 +105,15 @@ mappings:
     s: 
        value: ex:$(['@iot.id'])-geo
     po:
-      - [a, geo:Geometry]
+      - [a, geosparql:Geometry]
       - [a, geosf:Point]
       - p: geo:lat
         o: $(location.geometry.coordinates[1])
       - p: geo:long
         o: $(location.geometry.coordinates[0])
-      - p: geo:asWKT
+      - p: geosparql:asWKT
         o: POINT\($(location.geometry.coordinates[0]) $(location.geometry.coordinates[1])\)
-        datatype: geo:wktLiteral
+        datatype: geosparql:wktLiteral
         
         
   phenomenonTime:

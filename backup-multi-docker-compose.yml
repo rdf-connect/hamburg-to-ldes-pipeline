@@ -1,0 +1,83 @@
+services:
+  mongodb:
+    container_name: mongodb
+    image: mongo:latest
+    # image: mongo:4.4.29 # This is due to limitations in the Virtual Wall's hardware
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    # volumes:
+    #   - ./mongo-data:/data/db
+    # Don't expose the port to the outside world when running publicly
+    #ports:
+    #  - 27017:27017
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    networks:
+      - ldes
+  ldes:
+    container_name: ldes
+    build: ./ldes
+    ports:
+      - 3000:3000
+    restart: always
+    command: -b http://localhost:3000
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:3000
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    networks:
+      - ldes
+    depends_on:
+      - mongodb
+
+  hamburg_1:
+    container_name: h1
+    build: ./pipeline
+    environment:
+      - DEBUG=*
+      - DATASTREAM=25979
+    # volumes:
+    #   - ./pipeline/state:/opt/pipeline/state
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    networks:
+      - ldes
+    depends_on:
+      - mongodb
+
+  hamburg_2:
+    container_name: h2
+    build: ./pipeline
+    environment:
+      - DEBUG=*
+      - DATASTREAM=25863
+    # volumes:
+    #   - ./pipeline/state:/opt/pipeline/state
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    networks:
+      - ldes
+    depends_on:
+      - mongodb
+
+networks:
+  ldes:
+    name: ldes-network

@@ -6,14 +6,16 @@
 
 ### Import runners and processors
 <> owl:imports <./node_modules/@rdfc/js-runner/index.ttl>.
-<> owl:imports <https://javadoc.jitpack.io/com/github/rdf-connect/jvm-runner/runner/master-SNAPSHOT/runner-master-SNAPSHOT-index.jar>.
+# <> owl:imports <https://javadoc.jitpack.io/com/github/rdf-connect/jvm-runner/runner/master-SNAPSHOT/runner-master-SNAPSHOT-index.jar>.
+# <> owl:imports <https://javadoc.jitpack.io/com/github/rdf-connect/jvm-runner/runner/2f394f1/runner-2f394f1-all.jar> .
+# <> owl:imports <./build/plugins/rml-processor-jvm-master-SNAPSHOT-all.jar> .
+<> owl:imports <./build/plugins/rml-processor-jvm-569e589-all.jar> .
+<> owl:imports <./build/plugins/runner-master-SNAPSHOT-index.jar>.
 
 <> owl:imports <./node_modules/@rdfc/http-utils-processor-ts/processors.ttl>.
 <> owl:imports <./node_modules/@rdfc/log-processor-ts/processor.ttl>.
 <> owl:imports <./node_modules/@rdfc/file-utils-processors-ts/processors.ttl>.
 
-# <> owl:imports <./build/plugins/rml-processor-jvm-master-SNAPSHOT-all.jar>.
-<> owl:imports <./build/plugins/rml-processor-jvm-0.0.1-all.jar>.
 <> owl:imports <./node_modules/@rdfc/shacl-processor-ts/processors.ttl>.
 <> owl:imports <./node_modules/@rdfc/sds-processors-ts/configs/sdsify.ttl>.
 <> owl:imports <./node_modules/@rdfc/sds-processors-ts/configs/bucketizer.ttl>.
@@ -24,10 +26,11 @@
 # <> owl:imports <../../processors/sensorthings-api-fetcher-ts/processor.ttl>.
 
 ### Define the channels
-<hamburg> a rdfc:Reader, rdfc:Writer.
+<hamburg> a rdfc:Reader, rdfc:Writer;
+    rdfc:logLevel "debug".
+
 <mappingData> a rdfc:Reader, rdfc:Writer.
 <rdfdata> a rdfc:Reader, rdfc:Writer.
-
 <sds> a rdfc:Reader, rdfc:Writer.
 <metadata> a rdfc:Reader, rdfc:Writer. 
 <bucketized> a rdfc:Reader, rdfc:Writer.
@@ -40,7 +43,7 @@
 <> a rdfc:Pipeline;
    rdfc:consistsOf [
        rdfc:instantiates rdfc:NodeRunner;
-       rdfc:processor <fetcher>, <mappingReader>, <metadataReader>, <sdsify>, <bucketizer>, <ingest>, <logger>; 
+       rdfc:processor <fetcher>, <mappingReader>, <metadataReader>, <sdsify>, <bucketizer>, <ingest>; 
    ], [
        rdfc:instantiates rdfc:JvmRunner;
        rdfc:processor <mapper>;
@@ -52,9 +55,9 @@
 
 # fetcher to get SensorThings API data
 <fetcher> a rdfc:SensorThingsFetcher;
-    rdfc:datastream "https://iot.hamburg.de/v1.1/Datastreams(26110)";
+    rdfc:datastream "https://iot.hamburg.de/v1.1/Datastreams([[id]])";
     rdfc:writer <hamburg> ;
-    rdfc:mqttURL "mqtt://tld.iot.hamburg.de:1883".
+    rdfc:follow true .
 
 # Processor to read and stream out the RML mappings
 <mappingReader> a rdfc:GlobRead;
@@ -250,38 +253,29 @@
         rdfc:dataOutput <bucketized>;
         rdfc:metadataOutput <bucketizedMetadata>;
     ];
+    # rdfc:bucketizeStrategy [
+    #     a tree:TimebasedFragmentation;
+    #     tree:timestampPath stapi:resultTime;
+    #     tree:maxSize 100;
+    #     tree:k 4;
+    #     tree:minBucketSpan 3600;        # In seconds
+    # ];
     rdfc:bucketizeStrategy [
-        a tree:TimebasedFragmentation;
-        tree:timestampPath stapi:resultTime;
-        tree:maxSize 100;
-        tree:k 4;
-        tree:minBucketSpan 3600;        # In seconds
+        a tree:PageFragmentation;         # Create a new bucket when the previous bucket has 2 members
+        tree:pageSize 100;
     ];
-    rdfc:savePath <./buckets_save.json>;
-    rdfc:outputStreamId <https://w3id.org/sds#Stream>;
-    rdfc:prefix "root/".                  # The root fragment is located at '/root/' this defaults to ''
+    rdfc:savePath <./buckets_save[[id]].json>;
+    rdfc:outputStreamId <https://w3id.org/sds#HamburgDatastream([[id]])>;
+    rdfc:prefix "hamburg[[id]]/".                  # The root fragment is located at '/root/' this defaults to ''
 
 
-<ingest> a rdfc:Ingest;
+<ingest> a rdfc:IngestSDS;
     rdfc:dataInput <bucketized>;
     rdfc:metadataInput <bucketizedMetadata>;
     rdfc:database [ 
-        rdfc:url <mongodb://root:password@mongodb:27017/hamburg?authSource=admin>; # for docker environment
-        # rdfc:url <mongodb://localhost:27017/hamburg>; # for local testing
+        rdfc:url <mongodb://root:password@mongodb:27017/hamburg[[id]]?authSource=admin>; # for docker environment
+        # rdfc:url <mongodb://localhost:27017/hamburg[[id]]>; # for local testing
         rdfc:metadata "META";
         rdfc:data "DATA";
         rdfc:index "INDEX";
     ].
-
-
-
-
-# ###########
-# # Logging #
-# ###########
-
-# Processor to log the output
-<logger> a rdfc:LogProcessorJs;
-    rdfc:reader <hamburg>;
-    rdfc:level "info";
-    rdfc:label "out".

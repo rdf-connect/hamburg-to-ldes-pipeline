@@ -11,7 +11,8 @@
 @prefix map: <http://mapping.example.com/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix stapi: <https://w3id.org/stapi#> .
-@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
 @prefix geosf: <http://www.opengis.net/ont/sf#> .
 @prefix ex: <http://example.org/>.
 @prefix time: <http://www.w3.org/2006/time#> .
@@ -230,7 +231,7 @@ map:om_034 rml:reference "description" ;
 	rr:termType rr:Literal .
 
 map:om_035 rdf:type rr:ObjectMap ;
-	rr:constant geo:Geometry ;
+	rr:constant geosparql:Geometry ;
 	rr:termType rr:IRI .
 
 map:om_036 rdf:type rr:ObjectMap ;
@@ -246,7 +247,7 @@ map:om_038 rml:reference "location.geometry.coordinates[0]" ;
 	rr:termType rr:Literal .
 
 map:om_039 rdf:type rr:ObjectMap ;
-	rr:datatype geo:wktLiteral ;
+	rr:datatype geosparql:wktLiteral ;
 	rr:template "POINT({location.geometry.coordinates[0]} {location.geometry.coordinates[1]})" ;
 	rr:termType rr:Literal .
 
@@ -398,7 +399,7 @@ map:pm_035 rdf:type rr:PredicateMap ;
 	rr:constant stapi:description .
 
 map:pm_036 rdf:type rr:PredicateMap ;
-	rr:constant geo:hasGeometry .
+	rr:constant geosparql:hasGeometry .
 
 map:pm_037 rdf:type rr:PredicateMap ;
 	rr:constant rdf:type .
@@ -413,7 +414,7 @@ map:pm_040 rdf:type rr:PredicateMap ;
 	rr:constant geo:long .
 
 map:pm_041 rdf:type rr:PredicateMap ;
-	rr:constant geo:asWKT .
+	rr:constant geosparql:asWKT .
 
 map:pm_042 rdf:type rr:PredicateMap ;
 	rr:constant rdf:type .
